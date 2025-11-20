@@ -1,5 +1,5 @@
 // 后端 API（完整正确路径）
-const API_URL = "https://art-artist-story.onrender.com/generate";
+const API_URL = "https://art-artist-story.onrender.com";
 
 // 显示自定义栏逻辑
 function toggleCustom(selectEl, customEl) {
