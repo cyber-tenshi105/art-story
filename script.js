@@ -1,7 +1,5 @@
-// 后端 API
-const API_URL = "https://github.com/cyber-tenshi105/art-artist-story"; 
-});
-
+// 后端 API（完整正确路径）
+const API_URL = "https://art-artist-story.onrender.com/generate";
 
 // 显示自定义栏逻辑
 function toggleCustom(selectEl, customEl) {
