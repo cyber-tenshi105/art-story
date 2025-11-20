@@ -1,15 +1,10 @@
 {
-  "name": "artist-story-api",
+  "name": "art-story-frontend",
   "version": "1.0.0",
-  "type": "module",
-  "main": "server.js",
+  "description": "Frontend for Artist Story API",
   "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "body-parser": "^1.20.2",
-    "openai": "^4.67.2"
+    "build": "echo 'No build process needed for static site' && exit 0",
+    "vercel-build": "echo 'No build process needed for static site' && exit 0",
+    "dev": "echo 'Open index.html in browser'"
   }
 }
