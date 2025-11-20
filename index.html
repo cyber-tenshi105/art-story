@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>AI 画手包装生成器 2.0</title>
+
+<!-- 高级艺术字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Noto Serif SC", serif;
+        background: linear-gradient(135deg, #5f4b8b, #b8c1ec);
+        background-size: 200% 200%;
+        animation: flow 12s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding-top: 45px;
+    }
+
+    @keyframes flow {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    .glass {
+        width: 90%;
+        max-width: 780px;
+        padding: 40px 45px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 22px;
+        backdrop-filter: blur(18px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        color: #fff;
+        animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 30px;
+        letter-spacing: 3px;
+        font-weight: 600;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    label {
+        font-weight: 500;
+        font-size: 17px;
+        margin-top: 15px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    select, input, textarea {
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        border: none;
+        margin-bottom: 15px;
+        font-size: 15px;
+        background: rgba(255,255,255,0.45);
+        color: #2e2e2e;
+        backdrop-filter: blur(5px);
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #f7d1ff, #b8aafc);
+        color: #2e2e2e;
+        border: none;
+        font-weight: bold;
+        font-size: 17px;
+        border-radius: 16px;
+        cursor: pointer;
+        margin-top: 18px;
+        transition: 0.35s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(90deg, #fff, #d9d1ff);
+    }
+
+    #result {
+        background: rgba(255,255,255,0.25);
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 14px;
+        white-space: pre-wrap;
+        color: #fff;
+        font-size: 16px;
+        border-left: 4px solid #f1eaff;
+    }
+
+    /* AI 加载动画 */
+    .loader {
+        margin: 20px auto;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+</style>
+</head>
+<body>
+
+<div class="glass">
+<h1>AI 画手包装生成器</h1>
+
+<!-- 画手名称 -->
+<label>画手名称</label>
+<input id="artistName" placeholder="例如：星野弥生 / 小霁 / 你的昵称">
+
+<!-- 年龄段 -->
+<label>年龄段</label>
+<select id="age">
+    <option value="">选择年龄段</option>
+    <option value="90后">90后</option>
+    <option value="95后">95后</option>
+    <option value="00后">00后</option>
+    <option value="05后">05后</option>
+    <option value="自定义">自定义输入</option>
+</select>
+<input id="ageCustom" placeholder="自定义年龄段：" style="display:none;">
+
+<!-- 风格 -->
+<label>绘画风格</label>
+<select id="style">
+    <option value="">选择绘画风格</option>
+    <option value="二次元">二次元</option>
+    <option value="水墨">水墨</option>
+    <option value="厚涂">厚涂</option>
+    <option value="赛博朋克">赛博朋克</option>
+    <option value="黑白漫画">黑白漫画</option>
+    <option value="幻想插画">幻想插画</option>
+    <option value="潮流艺术">潮流艺术</option>
+    <option value="自定义">自定义输入</option>
+</select>
+<input id="styleCustom" placeholder="自定义风格：" style="display:none;">
+
+<!-- 从业经历 -->
+<label>从业经历</label>
+<select id="experience">
+    <option value="">选择经历</option>
+    <option value="自学 2 年">自学 2 年</option>
+    <option value="自学 3 年">自学 3 年</option>
+    <option value="半职业画手">半职业画手</option>
+    <option value="自由插画师">自由插画师</option>
+    <option value="接稿画师">接稿画师</option>
+    <option value="自定义">自定义输入</option>
+</select>
+<input id="experienceCustom" placeholder="自定义经历：" style="display:none;">
+
+<!-- 绘画特点 -->
+<label>绘画特点</label>
+<select id="features">
+    <option value="">选择特点</option>
+    <option value="色彩柔和">色彩柔和</option>
+    <option value="光影表现细腻">光影表现细腻</option>
+    <option value="线条干净">线条干净</option>
+    <option value="构图独特">构图独特</option>
+    <option value="画面富有情绪张力">画面富有情绪张力</option>
+    <option value="自定义">自定义输入</option>
+</select>
+<input id="featuresCustom" placeholder="自定义特点：" style="display:none;">
+
+<!-- 性格 -->
+<label>性格特质</label>
+<select id="personality">
+    <option value="">选择性格</option>
+    <option value="安静">安静</option>
+    <option value="敏感细腻">敏感细腻</option>
+    <option value="外向热情">外向热情</option>
+    <option value="内敛而富有创造力">内敛而富有创造力</option>
+    <option value="专注且极具耐心">专注且极具耐心</option>
+    <option value="自定义">自定义输入</option>
+</select>
+<input id="personalityCustom" placeholder="自定义性格：" style="display:none;">
+
+<!-- 关键词 -->
+<label>关键词（可选）</label>
+<textarea id="keywords" placeholder="如：梦境、星空、孤独、少女、温柔、混乱…"></textarea>
+
+<button onclick="generate()">生成艺术包装</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+// 切换自定义输入
+function linkCustom(selectId, inputId) {
+    document.getElementById(selectId).addEventListener("change", function () {
+        document.getElementById(inputId).style.display = (this.value === "自定义") ? "block" : "none";
+    });
+}
+linkCustom("age", "ageCustom");
+linkCustom("style", "styleCustom");
+linkCustom("experience", "experienceCustom");
+linkCustom("features", "featuresCustom");
+linkCustom("personality", "personalityCustom");
+
+
+// AI生成
+async function generate() {
+    const resultBox = document.getElementById("result");
+    resultBox.innerHTML = '<div class="loader"></div><div style="text-align:center;margin-top:10px;">正在生成艺术家包装...</div>';
+
+    function value(select, input) {
+        return document.getElementById(select).value === "自定义"
+            ? document.getElementById(input).value
+            : document.getElementById(select).value;
+    }
+
+    const data = {
+        artistName: document.getElementById("artistName").value,
+        age: value("age", "ageCustom"),
+        style: value("style", "styleCustom"),
+        experience: value("experience", "experienceCustom"),
+        features: value("features", "featuresCustom"),
+        personality: value("personality", "personalityCustom"),
+        keywords: document.getElementById("keywords").value
+    };
+
+    // ⚠ 填上你的 Render 后端 API 地址
+    const API_URL = "https://你的-render-地址.onrender.com/generate";
+
+    const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+    resultBox.innerHTML = json.text;
+}
+</script>
+
+</body>
+</html>

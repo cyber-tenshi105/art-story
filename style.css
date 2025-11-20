@@ -1,0 +1,96 @@
+/* 整体风格：极简、柔和、艺术感 */
+
+body {
+  background: #faf9f6;
+  font-family: "Noto Serif SC", serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  color: #333;
+}
+
+.container {
+  width: 680px;
+  padding: 40px 30px;
+  margin-top: 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* 输入框与下拉框 */
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fcfcfc;
+  font-size: 15px;
+  transition: border 0.2s;
+}
+
+.input:focus {
+  border-color: #999;
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 按钮 */
+.button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+.button:hover {
+  background: #444;
+}
+
+/* 输出框 */
+.output {
+  margin-top: 28px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 12px;
+  min-height: 150px;
+  white-space: pre-line;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  border-left: 4px solid #444;
+}
